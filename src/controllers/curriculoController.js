@@ -1,18 +1,16 @@
 const { Curriculo } = require('../../models');
 
-// CREATE (POST)
 const criarCurriculo = async (req, res) => {
   const { nome, email, telefone } = req.body;
   try {
-    const curriculo = await Curriculo.create({ nome, email, telefone });
-    res.status(201).json({ message: 'Currículo criado com sucesso!', data: curriculo });
+    const novoCurriculo = await Curriculo.create({ nome, email, telefone });
+    res.status(201).json({ message: 'Currículo criado com sucesso!', data: novoCurriculo });
   } catch (error) {
     console.error('Erro ao criar currículo:', error);
     res.status(500).json({ message: 'Erro ao criar currículo' });
   }
 };
 
-// READ (GET)
 const mostrarCurriculos = async (req, res) => {
   try {
     const curriculos = await Curriculo.findAll();
@@ -23,30 +21,32 @@ const mostrarCurriculos = async (req, res) => {
   }
 };
 
-// UPDATE (PUT)
 const editarCurriculo = async (req, res) => {
-  const { id, nome, email, telefone } = req.body;
+  const { id } = req.params;
+  const { nome, email, telefone } = req.body;
   try {
-    const curriculo = await Curriculo.findByPk(id);
-    if (!curriculo) return res.status(404).json({ message: 'Currículo não encontrado' });
-
-    await curriculo.update({ nome, email, telefone });
-    res.status(200).json({ message: 'Currículo editado com sucesso!', data: curriculo });
+    const [updated] = await Curriculo.update({ nome, email, telefone }, { where: { id } });
+    if (updated) {
+      const curriculoAtualizado = await Curriculo.findOne({ where: { id } });
+      res.status(200).json({ message: 'Currículo atualizado com sucesso!', data: curriculoAtualizado });
+    } else {
+      res.status(404).json({ message: 'Currículo não encontrado' });
+    }
   } catch (error) {
     console.error('Erro ao editar currículo:', error);
     res.status(500).json({ message: 'Erro ao editar currículo' });
   }
 };
 
-// DELETE
 const deletarCurriculo = async (req, res) => {
   const { id } = req.params;
   try {
-    const curriculo = await Curriculo.findByPk(id);
-    if (!curriculo) return res.status(404).json({ message: 'Currículo não encontrado' });
-
-    await curriculo.destroy();
-    res.status(200).json({ message: 'Currículo deletado com sucesso!' });
+    const deleted = await Curriculo.destroy({ where: { id } });
+    if (deleted) {
+      res.status(200).json({ message: 'Currículo deletado com sucesso!' });
+    } else {
+      res.status(404).json({ message: 'Currículo não encontrado' });
+    }
   } catch (error) {
     console.error('Erro ao deletar currículo:', error);
     res.status(500).json({ message: 'Erro ao deletar currículo' });
