@@ -1,17 +1,36 @@
 'use strict';
-const { Model } = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class Curriculo extends Model {
-    static associate(models) {}
-  }
+const { Model, DataTypes } = require('sequelize');
+
+module.exports = (sequelize) => {
+  class Curriculo extends Model {}
+
   Curriculo.init({
-    nome: DataTypes.STRING,
-    email: DataTypes.STRING,
-    telefone: DataTypes.STRING
+    nome: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    telefone: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
   }, {
     sequelize,
     modelName: 'Curriculo',
-    timestamps: true, // Ativa `createdAt` e `updatedAt`
   });
+
   return Curriculo;
 };
