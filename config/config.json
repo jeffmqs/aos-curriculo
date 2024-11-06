@@ -1,0 +1,45 @@
+{
+  "development": {
+    "username": "curriculo_db_1it1_user",
+    "password": "kUZGQCFXNQPoMFG6bUkVIjMHOBwCvr6M",
+    "database": "curriculo_db_1it1",
+    "host": "dpg-csg18itumphs73afrtt0-a.oregon-postgres.render.com",
+    "port": 5432,
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
+  },
+  "test": {
+    "username": "curriculo_db_1it1_user",
+    "password": "kUZGQCFXNQPoMFG6bUkVIjMHOBwCvr6M",
+    "database": "curriculo_db_1it1",
+    "host": "dpg-csg18itumphs73afrtt0-a.oregon-postgres.render.com",
+    "port": 5432,
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
+  },
+  "production": {
+    "username": "curriculo_db_1it1_user",
+    "password": "kUZGQCFXNQPoMFG6bUkVIjMHOBwCvr6M",
+    "database": "curriculo_db_1it1",
+    "host": "dpg-csg18itumphs73afrtt0-a.oregon-postgres.render.com",
+    "port": 5432,
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
+  }
+}
+
